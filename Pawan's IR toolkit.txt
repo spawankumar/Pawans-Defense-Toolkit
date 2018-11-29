@@ -1,0 +1,59 @@
+ 
+ Wireshark filters 
+ 
+
+ 
+ # below filter of finding the data which has been sent
+ tcp.flags.ack == 1 and data and tcp.flags.push == 0 
+ 
+ 
+  # filter ACK tcp flags, ACK tcp flag acknowledges that it has received data; filter packets with data only;  filter PSH tcp flags, PSH tcp flag informs the receiving host that the data
+should be pushed up to the receiving application
+ Ip.src == 70.237.254.204 and tcp.flags.ack == 1 and data and tcp.flags.push == 0 
+ 
+ 
+ # looks out for particular within the payload
+ http.content_type == “application/octet-stream”
+                       application/zip
+					   https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Complete_list_of_MIME_types
+					   
+					   
+
+Parsing Apache web server files 
+	# To find alot of connections from 1 Ip address
+		$ cat access.log | awk ‘{print $1}’ | sort –n | uniq –c | sort –nr |head -10
+	# Count number of hits per IP address in last 2000 lines of apache logs and print the IP and hits if hits > 20
+	 tail -n2000 /var/www/domains/*/*/logs/access_log | awk '{print $1}' | sort | uniq -c | sort -n | awk '{ if ($1 > 20)print $1,$2}'	
+	 
+
+
+
+
+
+
+Windows IR 
+
+Run 
+schtasks
+msconfig #check for startup items
+
+
+
+CMD Check for network connections. 
+ netstat -ano > Incident.txt
+ 
+ 
+ Use bulk IP address script to check for IP addrress repuration. Beware of Internal IP address includes VM's. 
+
+
+In Run  hosts file to redirect traffic from a benign site to a site they control and look at entries 
+  %SystemRoot%\System32\Drivers\etc\hosts
+  
+Check for list of services 
+ tasklist/svc 
+ 
+ 
+ Check for latest modified system files 
+ dir /a/o-d/p %SystemRoot%\System32\
+ 
+  
